@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>ES6</title>
+ <script>
+// 1. What will be the output
+ function Bar(){
+	(function self(){
+		console.log(this);
+	})();
+	}
+ function Drinks(){
+  (()=> console.log(this))();
+ }	 
+ 
+ const barObj = new Bar(); // Window Object
+ const drinksObj = new Drinks(); // Drink object
+
+
+//(ii) What will be the output
+	let foo = 0;
+	function bar() {
+		if (!foo) {
+			let foo = 10;
+			console.log(foo);
+		}
+		console.log(foo);
+	}
+	bar(); // output 10, 0
+
+	// (iii) What will be the output
+	let guessMe1 = 1;
+	let guessMe2 = 2;
+	{
+		try {
+	console.log( guessMe1, guessMe2 ); // (A)  IT will go to catch saying guessMe2 not defined
+	}
+	catch (err){
+	console.log("Oops", err)
+	}
+	let guessMe2 = 3;
+	console.log( guessMe1, guessMe2 ); // (B) output 1, 3
+	}
+	console.log( guessMe1, guessMe2 ); // (C) output 1, 2
+
+// 2. Arrow Function
+// (i) What will be the output
+	const myfunc = (list) => arguments[0].sort();
+	// const myList= myfunc([10,20,25]);
+	// console.log(myList); // Output argument not defined in arrow function
+
+//(ii) What will be the output
+	function foo1(n) {
+		const f = () => arguments[0] + n;
+		return f();
+	}
+	const myfoo = foo1(1);
+	console.log( myfoo ); // Output 2
+
+//(iii) What will be the output
+	var obj = {
+		i: 10,
+		b: () => console.log(this.i, this),
+		c: function() {
+		console.log(this.i, this);
+		}
+	}
+	obj.b(); // 10, window object
+	obj.c(); // 10, self object this
+
+// (iv) What will be the output
+	const Foo3 = () => { this.name ="Mike";};
+	// const obj1 = new Foo3(); // Arrow function dont have constructor
+	// console.log(obj1.name); // Error Foo is not a constructor
+
+// (v) What will be the output
+	const Foo2 = () => {};
+	// Foo2.prototype.name = "name"
+	// console.log(Foo2.name); // Arrow function dont have prototype. So throw Error
+
+/**
+* (vi) Write code snippet to create arrow function with name profile that takes 2 arguments (name * age) and return object with properties name & age in implicit/implied way (concise body
+*/ 
+const name ="Mike";
+const age = "20";
+const retunrObj = (name, age) => {
+	return {name, age};
+}
+console.log(retunrObj(name, age)); //Output: {name:Mike, age:20}
+
+/*
+(vii) Write an arrow function which takes array of integers, and returns the sum of the elements of the array. Use JS reduce method in solution.
+*/
+const sumOfArray = (arr) => {
+	return arr.reduce( (accumulator, currentValue) => accumulator + currentValue, 0);
+}
+console.log(sumOfArray([1, 2, 3, 5, 6, 7]));
+
+
+// 3. Default Arguments
+// (i) What will be the output
+	function calc(total, tax=.20, tip=.10){
+		return total + total*tax + total*tip;
+	}
+	const bill = calc(100,null,.2);
+	console.log(bill); //Output: 120
+
+// (ii) What will be the output
+	function test(num =1 ){
+		console.log(typeof num);
+	}
+	test(""); // Output: String
+
+/*
+(iii) Write a function that executes a callback function after a given delay in milliseconds. The default value of delay is one second.
+*/
+	const delayCallBack = function (callback, delay = 1000){
+		setTimeout (()=> callback(), delay);
+	}
+	
+	delayCallBack( () => console.log('callback'), 5000 );
+
+
+/*
+(iv)Change the below code such that the second argument of printComment has a default value
+that’s initially 1, and is incremented by 1 after each call.
+*/
+	let initiallyVal = 1
+	function printComment( comment , line = (()=> initiallyVal++)() ) {
+		console. log( line, comment ) ;
+	}
+
+	printComment('hi');
+	printComment('hello')
+
+/*
+(i) What will be the output
+*/
+	const curriedMultiply = n => m => n * m;
+	const calc1 = curriedMultiply(3)(4)
+	console.log(calc1); // Output: 12
+
+/*
+(ii) Create a function than when executed as follows
+greetings('Mike')('Wish you Happy Birthday!')('Steve');
+will print in below format (Should maintain line breaks)
+Dear Mike,
+Wish you Happy Birthday!
+From,
+*/
+	const greetings = (param1) => (param2) => (param3) => {
+		return ` Dear ${param1},
+		${param2}
+		From,
+		${param3}`
+	};
+
+	console.log(greetings('Mike')('Wish you Happy Birthday!')('Steve'));
+ </script>
+</head>
+
+<body>
+<h1>ES6 - Exercise - 1</h1>
+ 
+</body></html>
