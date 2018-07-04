@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>ES6</title>
+ <script>
+// 1. Spread Operator & Rest Parameter
+
+/*
+I. Create a JavaScript function that takes a string as argument and returns a string with letters in alphabetical order. Example string: 'dbca' Expected Output: ‘abcd’
+Note: Use Arrow function with spread operator to achieve solution
+*/
+
+const revString = (str) => {
+	const newStr = [...str];
+	return newStr.sort().join('');
+}
+console.log(revString('vishnussdsaffwwa'));
+ </script>
+</head>
+
+<body>
+<h1>ES6 - Exercise - 1</h1>
+ 
+</body></html>
