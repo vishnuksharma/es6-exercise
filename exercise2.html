@@ -16,6 +16,181 @@ const revString = (str) => {
 	return newStr.sort().join('');
 }
 console.log(revString('vishnussdsaffwwa'));
+
+
+/*
+II. Solve using arguments object and spread operator
+Define a function that concatenates several strings in below format
+– Function should take a separator as first argument and multiple strings arguments
+– Function should return strings concatenated and separated by separator
+Input: test(", ", "Hello Sir", "How are you", "My name is Mike");
+Output - "Hello Sir, How are you, My name is Mike"
+*/
+function concatenates (sep, args){
+	// console.log(arguments);
+	// return Array.prototype.slice.call(arguments).splice(1).join(sep);
+	return Array.from(arguments).splice(1).join(sep);
+}
+console.log(concatenates(", ", "Hello Sir", "How are you", "My name is Mike"));
+/*
+III. Solve using arrow function and …rest param
+Define a function that concatenates several strings in below format
+– Function should take a separator as first argument and multiple strings arguments
+– Function should return strings concatenated and separated by separator
+Input: test(", ", "Hello Sir", "How are you", "My name is Mike");
+Output - "Hello Sir, How are you, My name is Mike"
+*/
+const sentenceBuilder = (separator, ...sentence) =>  sentence.join(separator);
+console.log(sentenceBuilder(", ", "Hello Sir", "How are you", "My name is Mike"));
+
+
+// IV. What will be the output?
+// const myfunc = (...arg, separator)=>arg.join(separator);
+// const myVal = myfunc(10,20,30, ",");
+// console.log(myVal); // Error: Rest parameter must be last formal parameter
+
+// V. What will be the output?
+const myfunc = (...arg) => arg.join(",");
+// const myfunc = ...arg => arg.join(",");
+const myVal = myfunc(10,20,30);
+console.log(myVal); // OUtput: SyntaxError: Unexpected token because should be (...arg)
+
+/*
+VI. Solve using spread operator
+Write an arrow function that takes Integer as argument and returns integer in reverse
+Example:
+Input – funcReverse(123456);
+Output – 654321 */
+const reverseInt = (data) => {
+	// first solution
+	return parseInt([...String(data)].reverse().join(''));
+	// second solution
+	let total = 0;
+	while (data > 0){
+		total = (total*10) + data%10;
+		data = Math.floor(data/10);
+	}
+	return total;
+
+}
+console.log(reverseInt(123456));
+
+// VII. What will be the output?
+let array1 = [1,2];
+let array2 = [3,4,5];
+array1.push(array2);
+console.info(array1); // Output: [1,2,[3,4,5]]
+
+/*
+VIII. Solve using native apply method to push array elements into another array
+Write an arrow function that take 3 arrays as argument and appends last 2 arrays elements into first array and returns first array (Don’t return new array, return same first array passed in argument after appending last 2 arrays elements to it)
+*/
+const pushArrInsideArr = (param1, param2, param3) => {
+	Array.prototype.push.apply(param1, param2)
+	Array.prototype.push.apply(param1, param3);
+	return param1;
+}
+console.log(pushArrInsideArr(['a', 'b'], ['c', 'd'], ['e', 'f']))
+
+
+/*
+IX. Solve using spread operator to push array elements into another array
+Write an arrow function that take 3 arrays as argument and appends last 2 arrays elements into first array and returns first array (Don’t return new array, return same first array passed in argument after appending last 2 arrays elements to it)
+*/
+const pushArrInsideArrUsingSpread = (param1, param2, param3) => {
+	param1.push(...param2, ...param3);
+	return param1;
+}
+console.log(pushArrInsideArrUsingSpread([1,2,3,4], [5,6,7,8], [9, 10]))
+
+
+// 2. Destructuring
+
+// I. What will be the output?
+function f() {
+	return [2, 5, 6];
+}
+let x, y;
+[x , , y] = f();
+console.log(x); // Output: 2
+console.log(y); // Output: 6
+
+
+// II. Write expression for destructuring below object without variable declaration
+let obj = { a: 2, b: 4 };
+const {a, b} = obj;
+console.log(a);
+console.log(b);
+
+/* III. Write expression for destructuring below object, extract company, name, age, state, spouse name
+Note : Assign to new variable names and provide default values for company and state
+*/
+let data = {
+	role:"Engineer",
+	company:"SR",
+	personal: {
+			name:"Sumit",
+			age:25,
+			country:"IND",
+			state:undefined,
+			spouse: {
+			name:"Reena"
+			}
+	  	}
+	};
+
+let {company='new company', personal: {name:newName='default', age, state='new state', spouse: {spouseName} } } = data;
+console.log('=============');
+console.log(company);
+console.log(newName);
+console.log(age);
+console.log(state);
+console.log(spouseName);
+
+/*
+IV. Write an example of destructuring inside the for-of loop for below list to create a new list of objects with only name and company properties
+*/
+let arr = [
+		{name:"Mike", age :25, role:"Engineer", company:"SR"},
+		{name:"Sam", age :27, role:"Senior Engineer", company:"SR"} ,
+		{name:"Peter", age :28, role:"Senior Program Manager", company:"SR"}
+	]
+	let newArray = [];
+	for (ar of arr) {
+		let {name, company } = ar;
+		newArray.push({name, company});
+	}
+	console.log(newArray);
+
+
+// V. Write expression for destructuring below object, extract children name
+let data1 = {
+	role:"Engineer",
+	company:"SR",
+	personal: {
+		name:"Sumit",
+		age:25,
+		country:"IND",
+		state:undefined,
+		children:[ {
+			name:"Mayank"
+			}]
+		}
+	}
+
+ const [{name}] = data1.personal.children;
+ console.log(name);
+
+
+// VI. Write a function to show destructuring for objects passed as function parameter
+
+
+
+
+
+// VII. Write examples to show rest param usage in array and object destructuring
+
+
  </script>
 </head>
 
