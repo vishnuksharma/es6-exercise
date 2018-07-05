@@ -184,12 +184,21 @@ let data1 = {
 
 // VI. Write a function to show destructuring for objects passed as function parameter
 
-
+const arrDestruct = ({name, company}) => {
+	console.log(name);
+	console.log(company);
+}
+arrDestruct({name: 'Vishnu', company: 'sapient'});
 
 
 
 // VII. Write examples to show rest param usage in array and object destructuring
-
+var arrayList = [1, 2, 3, 4,5,6];
+	const [p, q, r] = arrayList;
+	console.log(p, q, r)
+	// using rest parameter
+	var [first, second, ...rest] = arrayList;
+	console.log(rest);
 
  </script>
 </head>
